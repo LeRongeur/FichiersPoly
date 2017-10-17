@@ -1,0 +1,121 @@
+LIVE --->
+
+NODE 1 IN:
+	b
+	c
+	d
+
+NODE 1 OUT:
+	b
+	c
+	d
+
+NODE 2 IN:
+	b
+	c
+	d
+
+NODE 2 OUT:
+	b
+	c
+	d
+
+NODE 3 IN:
+	b
+	c
+	d
+
+NODE 3 OUT:
+	b
+	c
+
+NODE 4 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 4 OUT:
+	a
+	b
+	c
+	d
+	i
+NODE 5 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 5 OUT:
+	a
+	b
+	c
+	d
+	i
+NODE 6 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 6 OUT:
+	a
+	b
+	c
+	d
+	i
+NODE 7 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 7 OUT:
+	a
+	b
+	c
+	d
+	i
+NODE 8 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 8 OUT:
+	a
+	b
+	c
+	d
+	i
+NODE 9 IN:
+	a
+	b
+	c
+	d
+	i
+
+NODE 9 OUT:
+	a
+	b
+	c
+	d
+	i
+
+<--- LIVE
+
+t1 = 2*c
+t2 = t1 + d
+t3 = d*t2
+t = t3
+t4 = c*c
+t5 = d*d
+c = t4 + t5
+d = t
+i = i / 2

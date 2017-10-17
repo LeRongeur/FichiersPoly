@@ -1,0 +1,16 @@
+digraph g {
+  "block0" [label="Exit", shape="rectangle"];
+  "block1" [label=" b=b
+b=b
+
+ ", shape="rectangle"];
+  "block2" -> "block1";
+  "block1" -> "block0";
+  "block2" [label=" a=5
+b=nota
+b*=b*=c+1
+if notb<c&&a!=0 : 
+ ", shape="rectangle"];
+  "block3" [label="Start", shape="rectangle"];
+  "block3" -> "block2";
+}

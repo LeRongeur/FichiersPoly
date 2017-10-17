@@ -1,0 +1,12 @@
+digraph g {
+  "block0" [label="Exit", shape="rectangle"];
+  "block1" [label=" a=45
+b=3
+c=a^b+12
+k=5
+a+=k
+p=0
+ ", shape="rectangle"];
+  "block2" [label="Start", shape="rectangle"];
+  "block2" -> "block1";
+}

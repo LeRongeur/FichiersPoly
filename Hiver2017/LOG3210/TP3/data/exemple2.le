@@ -1,0 +1,13 @@
+test = 0;
+resultat = 10;
+if test == 0:
+{
+  resultat = 1;
+}
+else
+{
+  resultat /= test;
+  test = 0;
+}
+test = 25;
+

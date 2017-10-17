@@ -1,0 +1,282 @@
+PARSER_BEGIN(Exercice1)
+
+class Exercice1
+{
+	
+	public static void main(String args[])
+	{
+		Exercice1 p = new Exercice1( new java.io.DataInputStream(System.in));
+		try {
+			int val = p.Program();
+			System.out.println(val);
+		} catch (Exception e) {
+			System.out.println("Erreur: " + '\n' + e);
+			System.exit(-1);
+		}
+	}
+}
+
+PARSER_END(Exercice1)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+	<COMPARE: < LESS > | < LESSEQUAL > | < GREAT > | <GREATEQUAL > | < DIFF > | < EQUALEQUAL > > |
+	< #LESS: "<" > | 
+	< #LESSEQUAL: "<=" > | 
+	< #GREAT: ">" > | 
+	< #GREATEQUAL: ">=" > | 
+	< #DIFF: "!=" > | 
+	< #EQUALEQUAL: "==" > |
+	<TOK: ["1"-"9"] (["0"-"9"])* | "0" >
+}
+
+
+
+int Program() :
+{
+	int total;
+}
+{
+	total = CompExpr() ";" <EOF> { return total; }
+	
+}
+
+int CompExpr() : 
+{
+	Token t;
+	int total;
+	int a;
+	String compare;
+	boolean comparisonResult = false;
+}
+{
+	a = AndOrExpr() {  total = a; }
+	( 
+		t = <COMPARE> 
+		a = AndOrExpr()
+		{
+			compare = (t.image);
+			switch(compare)
+			{
+			case ">": 
+					comparisonResult = total > a;
+					break;
+
+			case ">=":
+					comparisonResult = total >= a;
+					break;
+
+			case "<":
+					comparisonResult = total < a;
+					break;
+
+			case "<=":
+					comparisonResult = total <= a;
+					break;
+
+			case "!=":
+					comparisonResult = total != a;
+					break;
+
+			case "==":
+					comparisonResult = total == a;
+					break;
+			}
+			total =  comparisonResult ? 1 : 0;
+		} 
+	)* 
+	{ return total; }
+}
+
+int AndOrExpr() : 
+{
+	int total;
+	int a;
+	int b;
+	Token compare;
+	boolean comparisonResult = false;
+	boolean boolTotal;
+	boolean boolA;
+}
+{
+	a = NotExpr() { total = a; }
+	( 
+		(compare = "&&" | compare = "||" ) 
+		a = NotExpr() 
+		{
+			if(total == 0)
+			{
+				boolTotal = false;
+			}
+			else
+			{
+				boolTotal = true;
+			}
+
+			if(a == 0)
+			{
+				boolA = false;
+			}
+			else
+			{
+				boolA = true;
+			}
+			switch(compare.image)
+			{
+				case "&&":
+					comparisonResult = boolTotal && boolA;
+					break;
+				case "||":
+					comparisonResult = boolTotal || boolA;
+					break;
+			}
+			total =  comparisonResult ? 1 : 0;
+
+		}
+	)* 
+	{ return total; }
+}
+
+int NotExpr() : 
+{
+	int total;
+	int a;
+	int compteur = 0;
+	boolean comparisonResult;
+	boolean boolA;
+}
+{
+	("not" { compteur++; } )*  a = AddExpr()
+	{
+		if(a == 0)
+		{
+			boolA = false;
+		}
+		else
+		{
+			boolA = true;
+		}
+		if(compteur >= 1 )
+		{
+			if(compteur%2 == 1)
+			{
+				comparisonResult = !boolA;
+			}
+			else
+			{
+				comparisonResult = boolA;
+			}
+			total =  comparisonResult ? 1 : 0;
+		}
+		else
+		{
+			total = a;
+		}
+	}
+	{ return total; }
+}
+
+int AddExpr() : 
+{
+	int total;
+	int a;
+	Token operator;
+}
+{
+	a = MultExpr() {total = a;}
+	(
+		(operator = "+"| operator = "-") a = MultExpr() 
+		{ 
+			if(operator.image == "+")
+			{
+				total = total + a;
+			}
+			else if (operator.image == "-")
+			{
+				total = total - a;
+			}
+		}
+	)*
+	{ return total; }
+}
+
+int MultExpr() : 
+{
+	int total;
+	int a;
+	Token operator;
+}
+{
+	a = PowExpr() {total = a;} 
+	( 
+		(operator = "*" | operator= "/") a = PowExpr() 
+		{
+			if(operator.image == "*")
+			{
+				total = total * a;
+			}
+			else if (operator.image == "/")
+			{
+				total = total / a;
+			}
+		}
+	)*
+	{ return total; }
+}
+
+int PowExpr() : 
+{
+	int total;
+	int a;
+}
+{
+	a = NegExpr() {total = a;}
+	( 
+		"^" a = NegExpr()
+		{
+			total = (int) Math.pow(total, a);
+		} 
+	)*
+	{ return total; }
+}
+
+int NegExpr() : 
+{
+	int total;
+	int a;
+	int compteur = 0;
+}
+{
+	("-" { compteur++; } )* a = BasicExpr() 
+	{
+		if(compteur%2 == 1)
+		{
+			total = -a;
+		}
+		else
+		{
+			total = a;
+		}
+	}
+	{ return total; }
+}
+
+int BasicExpr() : 
+{
+	Token t;
+	int total;
+}
+{
+	( t = <TOK> {total = Integer.parseInt(t.image);}
+	| 
+	"(" total = CompExpr() ")" )
+	{return total;}
+}

@@ -1,0 +1,10 @@
+a = 5;
+b = not not not a;
+
+b += b *= c + 1;
+
+if not (b < c) && a != 0:
+{
+  b = myFunc(3,b);
+  print(b);
+}

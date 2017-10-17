@@ -1,0 +1,130 @@
+digraph g {
+  "block0" [label="Exit", shape="rectangle"];
+  "block1" [label=" test=1
+ ", shape="rectangle"];
+  "block2" -> "block1";
+  "block1" -> "block0";
+  "block2" [label=" res=a+b
+a=b
+b=res
+res=a+b
+a=b
+b=res
+
+test-=1
+ ", shape="rectangle"];
+  "block3" [label=" a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+a=0
+b=1
+a=0
+b=1
+
+if test<=0 : 
+
+
+
+
+ ", shape="rectangle"];
+  "block4" [label="Start", shape="rectangle"];
+  "block4" -> "block3";
+}

@@ -1,0 +1,67 @@
+PARSER_BEGIN(ExSemantique)
+class ExSemantique 
+{
+  public static void main(String args[]) 
+  {
+    System.out.println("Lecture de l'entree standard...");
+    ExSemantique p = new ExSemantique(new java.io.DataInputStream(System.in));
+    try {
+      int val = p.Fichier();
+      System.out.println("Fichier analyse avec succes!");
+      System.out.println("Total: " + val);
+    } catch (Exception e) {
+      System.out.println("Erreur: " + '\n' + e);
+    }
+  }
+}	
+PARSER_END(ExSemantique)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+ <TOK: ["0"-"9"] >
+}
+
+
+int Fichier() : 
+{
+  int total;
+}
+{
+  total = E() <EOF>
+  {return total;}
+}
+
+
+int E() :
+{
+  int a;
+  int total;
+}
+{
+  a = Number()  { total = a;}
+  ( 
+    "+"  a = Number()  { total = total + a;}
+  )*
+  { return total;}
+}
+
+int Number() :
+{
+  Token t;
+  int a;
+}
+{
+  t = <TOK> 
+  { 
+    a = Integer.parseInt(t.image); 
+    return a;
+  }
+}

@@ -1,0 +1,23 @@
+digraph g {
+  "block0" [label="Exit", shape="rectangle"];
+  "block1" [label=" b-=4
+ ", shape="rectangle"];
+  "block2" [label=" 
+ ", shape="rectangle"];
+  "block4" -> "block2";
+  "block2" -> "block1";
+  "block3" [label=" a=30+p
+ ", shape="rectangle"];
+  "block4" -> "block3";
+  "block3" -> "block1";
+  "block4" [label=" if b<=0 : 
+ ", shape="rectangle"];
+  "block5" -> "block4";
+  "block4" -> "block3";
+  "block5" [label=" a=1
+b=0
+if a>0 : 
+ ", shape="rectangle"];
+  "block6" [label="Start", shape="rectangle"];
+  "block6" -> "block5";
+}

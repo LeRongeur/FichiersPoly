@@ -1,0 +1,7 @@
+int b = a = c;
+b += b *= c + 1;
+
+if not (b < c) && a != 0:
+{
+  print(b);
+}
